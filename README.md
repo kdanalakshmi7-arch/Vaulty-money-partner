@@ -1,0 +1,3 @@
+**Vaultly — Your Money, Beautifully Managed 💜**
+
+Vaultly is a modern, elegant personal finance tracker designed to make managing money simple, motivating, and enjoyable. Featuring a luxurious light-themed interface with a custom plum, champagne, and copper palette, Vaultly helps users track expenses, manage monthly budgets, monitor savings goals, and gain insights into their spending habits. With interactive dashboards, smooth animations, motivational challenges, achievement badges, and personal streaks, Vaultly transforms everyday financial management into a rewarding experience. ✨

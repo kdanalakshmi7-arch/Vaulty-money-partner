@@ -1,0 +1,810 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#F8F5F0">
+
+    <title>Vaultly | Your Money, Beautifully Managed</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div class="app-shell">
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <a href="#" class="brand" aria-label="Vaultly home">
+                <span class="brand-mark">
+                    <svg viewBox="0 0 40 40" aria-hidden="true">
+                        <path d="M8 13 L20 5 L32 13 V27 L20 35 L8 27 Z"
+                              fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M14 20 L20 14 L26 20 L20 26 Z"
+                              fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </span>
+                <span>vaultly<span class="brand-dot">.</span></span>
+            </a>
+
+            <div class="sidebar-label">YOUR SPACE</div>
+
+            <nav class="main-nav" aria-label="Main navigation">
+                <button class="nav-item active" data-page="overview">
+                    <span class="nav-icon">◈</span>
+                    <span>Overview</span>
+                </button>
+
+                <button class="nav-item" data-page="transactions">
+                    <span class="nav-icon">⇄</span>
+                    <span>Transactions</span>
+                </button>
+
+                <button class="nav-item" data-page="insights">
+                    <span class="nav-icon">⌁</span>
+                    <span>Insights</span>
+                </button>
+
+                <button class="nav-item" data-page="goals">
+                    <span class="nav-icon">◎</span>
+                    <span>Goals</span>
+                </button>
+
+                <button class="nav-item" data-page="money-story">
+                    <span class="nav-icon">✧</span>
+                    <span>Money Story</span>
+                </button>
+
+                <button class="nav-item" data-page="quests">
+                    <span class="nav-icon">♧</span>
+                    <span>Money Quests</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="sidebar-tip">
+                    <span class="tip-sparkle">✦</span>
+                    <p class="tip-label">A LITTLE REMINDER</p>
+                    <p class="tip-text">
+                        Small steps today. More freedom tomorrow.
+                    </p>
+                </div>
+
+                <button class="profile-button" id="profileButton">
+                    <span class="avatar">V</span>
+                    <span class="profile-info">
+                        <strong>My Vault</strong>
+                        <small>Your financial journey</small>
+                    </span>
+                    <span class="profile-menu-icon">···</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <main class="main-content">
+
+            <!-- Top bar -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="menu-toggle" id="menuToggle"
+                            aria-label="Toggle navigation">☰</button>
+
+                    <div>
+                        <p class="eyebrow" id="currentDate">YOUR FINANCIAL SPACE</p>
+                        <h1 id="pageTitle">Your money, <span>in flow.</span></h1>
+                    </div>
+                </div>
+
+                <div class="topbar-actions">
+                    <button class="icon-button" id="soundToggle"
+                            aria-label="Toggle sounds" title="Toggle sounds">♫</button>
+
+                    <button class="primary-button" id="addTransactionButton">
+                        <span>＋</span> Add transaction
+                    </button>
+                </div>
+            </header>
+
+            <!-- Overview page -->
+            <section class="page-section active" id="overviewPage">
+
+                <!-- Welcome -->
+                <div class="welcome-row">
+                    <div>
+                        <p class="section-kicker">YOUR OVERVIEW</p>
+                        <h2>A clearer view of your money.</h2>
+                        <p class="muted-text">
+                            Every small choice is part of a bigger picture.
+                        </p>
+                    </div>
+
+                    <label class="period-selector">
+                        <span class="sr-only">Dashboard period</span>
+                        <select id="dashboardPeriod">
+                            <option value="month">This month</option>
+                            <option value="week">This week</option>
+                            <option value="year">This year</option>
+                            <option value="all">All time</option>
+                        </select>
+                    </label>
+                </div>
+
+                <!-- Summary cards -->
+                <div class="summary-grid">
+
+                    <article class="summary-card balance-card">
+                        <div class="card-topline">
+                            <span class="card-label">TOTAL BALANCE</span>
+                            <span class="card-symbol">◈</span>
+                        </div>
+
+                        <p class="amount" id="totalBalance">₹0.00</p>
+
+                        <div class="balance-footer">
+                            <span class="balance-indicator">✦</span>
+                            <span>Your financial snapshot</span>
+                        </div>
+
+                        <div class="balance-decoration decoration-one"></div>
+                        <div class="balance-decoration decoration-two"></div>
+                    </article>
+
+                    <article class="summary-card">
+                        <div class="card-topline">
+                            <span class="card-label">TOTAL INCOME</span>
+                            <span class="metric-icon income-icon">↙</span>
+                        </div>
+
+                        <p class="amount" id="totalIncome">₹0.00</p>
+                        <p class="metric-caption">Money coming in</p>
+                        <div class="mini-line income-line"></div>
+                    </article>
+
+                    <article class="summary-card">
+                        <div class="card-topline">
+                            <span class="card-label">TOTAL EXPENSES</span>
+                            <span class="metric-icon expense-icon">↗</span>
+                        </div>
+
+                        <p class="amount" id="totalExpenses">₹0.00</p>
+                        <p class="metric-caption">Money going out</p>
+                        <div class="mini-line expense-line"></div>
+                    </article>
+
+                    <article class="summary-card">
+                        <div class="card-topline">
+                            <span class="card-label">NET SAVINGS</span>
+                            <span class="metric-icon savings-icon">✧</span>
+                        </div>
+
+                        <p class="amount" id="netSavings">₹0.00</p>
+                        <p class="metric-caption">Income minus expenses</p>
+                        <div class="mini-line savings-line"></div>
+                    </article>
+
+                </div>
+
+                <!-- Main dashboard columns -->
+                <div class="dashboard-grid">
+
+                    <!-- Flowline -->
+                    <article class="panel flowline-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="section-kicker">YOUR MONEY, IN MOTION</p>
+                                <h3>Flowline<span class="heading-dot">.</span></h3>
+                            </div>
+
+                            <span class="live-indicator">
+                                <span class="live-dot"></span> Your activity
+                            </span>
+                        </div>
+
+                        <p class="panel-description">
+                            See how money moves through your life.
+                        </p>
+
+                        <div class="flowline-visual" id="flowlineVisual">
+                            <div class="flowline-orbit orbit-one"></div>
+                            <div class="flowline-orbit orbit-two"></div>
+
+                            <svg class="flowline-svg" viewBox="0 0 500 180"
+                                 preserveAspectRatio="none"
+                                 role="img"
+                                 aria-label="Illustration of money flowing between income, expenses, and savings">
+                                <defs>
+                                    <linearGradient id="flowGradient" x1="0" y1="0" x2="1" y2="0">
+                                        <stop offset="0%" stop-color="#6D456E"/>
+                                        <stop offset="52%" stop-color="#B58B65"/>
+                                        <stop offset="100%" stop-color="#D8B879"/>
+                                    </linearGradient>
+                                </defs>
+
+                                <path class="flow-path flow-path-back"
+                                      d="M0 90 C70 15 120 165 190 90 S320 15 390 90 S455 140 500 65"/>
+
+                                <path class="flow-path flow-path-main"
+                                      d="M0 90 C70 15 120 165 190 90 S320 15 390 90 S455 140 500 65"/>
+
+                                <circle class="flow-node" cx="95" cy="83" r="5"/>
+                                <circle class="flow-node" cx="250" cy="76" r="5"/>
+                                <circle class="flow-node" cx="405" cy="97" r="5"/>
+                            </svg>
+
+                            <div class="flow-label flow-label-income">
+                                <span class="flow-label-dot income-dot"></span>
+                                <span>Income</span>
+                                <strong id="flowIncome">₹0</strong>
+                            </div>
+
+                            <div class="flow-label flow-label-expenses">
+                                <span class="flow-label-dot expense-dot"></span>
+                                <span>Expenses</span>
+                                <strong id="flowExpenses">₹0</strong>
+                            </div>
+
+                            <div class="flow-label flow-label-savings">
+                                <span class="flow-label-dot savings-dot"></span>
+                                <span>Net savings</span>
+                                <strong id="flowSavings">₹0</strong>
+                            </div>
+                        </div>
+
+                        <div class="flowline-footer">
+                            <span>Based on your recorded transactions</span>
+                            <button class="text-button" data-page="insights">
+                                Explore insights →
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Budget -->
+                    <article class="panel budget-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="section-kicker">SPEND WITH INTENTION</p>
+                                <h3>Monthly budget</h3>
+                            </div>
+
+                            <span class="panel-icon">◷</span>
+                        </div>
+
+                        <p class="budget-caption">Your spending against your limit.</p>
+
+                        <div class="budget-ring" id="budgetRing">
+                            <div class="budget-ring-inner">
+                                <span class="budget-ring-label">SPENT</span>
+                                <strong id="budgetSpent">₹0</strong>
+                                <span id="budgetPercentage">0% used</span>
+                            </div>
+                        </div>
+
+                        <div class="budget-details">
+                            <div>
+                                <span class="detail-dot spent-dot"></span>
+                                <span>Spent</span>
+                                <strong id="budgetSpentLegend">₹0</strong>
+                            </div>
+
+                            <div>
+                                <span class="detail-dot remaining-dot"></span>
+                                <span>Remaining</span>
+                                <strong id="budgetRemaining">₹0</strong>
+                            </div>
+                        </div>
+
+                        <button class="secondary-button full-width" data-page="insights">
+                            View budget details
+                        </button>
+                    </article>
+
+                </div>
+
+                <!-- Transactions and motivation -->
+                <div class="lower-grid">
+
+                    <article class="panel transactions-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="section-kicker">THE LATEST</p>
+                                <h3>Recent transactions</h3>
+                            </div>
+
+                            <button class="text-button" data-page="transactions">
+                                View all →
+                            </button>
+                        </div>
+
+                        <div class="transaction-list" id="recentTransactions">
+                            <div class="empty-state">
+                                <span class="empty-state-icon">✧</span>
+                                <h4>Your story starts here.</h4>
+                                <p>Add your first transaction to see your money in motion.</p>
+                                <button class="secondary-button" id="emptyAddButton">
+                                    Add your first transaction
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="panel motivation-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="section-kicker">YOUR PERSONAL JOURNEY</p>
+                                <h3>Little wins, big change.</h3>
+                            </div>
+
+                            <span class="panel-icon">✦</span>
+                        </div>
+
+                        <p class="motivation-message" id="motivationMessage">
+                            You don't need to be perfect with money. You just need a place to begin.
+                        </p>
+
+                        <div class="streak-card">
+                            <span class="streak-flame">✦</span>
+                            <div>
+                                <strong id="trackingStreak">0 day streak</strong>
+                                <span id="streakCaption">Start building your tracking habit.</span>
+                            </div>
+                        </div>
+
+                        <div class="level-row">
+                            <div class="level-emblem">V</div>
+                            <div class="level-info">
+                                <div class="level-heading">
+                                    <strong id="userLevel">Level 1 · Beginner</strong>
+                                    <span id="userPoints">0 XP</span>
+                                </div>
+
+                                <div class="level-progress">
+                                    <div class="level-progress-fill" id="levelProgressFill"></div>
+                                </div>
+
+                                <small id="nextLevelText">Your journey begins with one small step.</small>
+                            </div>
+                        </div>
+
+                        <button class="secondary-button full-width" data-page="quests">
+                            Explore Money Quests →
+                        </button>
+                    </article>
+
+                </div>
+
+                <!-- Smart highlight -->
+                <article class="insight-banner">
+                    <div class="insight-banner-icon">✧</div>
+
+                    <div class="insight-banner-content">
+                        <p class="section-kicker">A MOMENT OF CLARITY</p>
+                        <h3 id="highlightTitle">Your financial story starts with awareness.</h3>
+                        <p id="highlightMessage">
+                            Add transactions to discover patterns and get helpful suggestions based on your own activity.
+                        </p>
+                    </div>
+
+                    <button class="text-button" data-page="insights">
+                        Discover more →
+                    </button>
+                </article>
+
+            </section>
+
+            <!-- Transactions page -->
+            <section class="page-section" id="transactionsPage" hidden>
+                <div class="welcome-row">
+                    <div>
+                        <p class="section-kicker">YOUR MONEY ACTIVITY</p>
+                        <h2>Every transaction, in one place.</h2>
+                        <p class="muted-text">Understand where your money comes from and where it goes.</p>
+                    </div>
+
+                    <button class="primary-button" data-open-transaction>
+                        ＋ Add transaction
+                    </button>
+                </div>
+
+                <article class="panel">
+                    <div class="transaction-toolbar">
+                        <input type="search" id="transactionSearch"
+                               placeholder="Search transactions..."
+                               aria-label="Search transactions">
+
+                        <select id="transactionTypeFilter" aria-label="Filter by transaction type">
+                            <option value="all">All types</option>
+                            <option value="income">Income</option>
+                            <option value="expense">Expenses</option>
+                        </select>
+
+                        <select id="transactionCategoryFilter" aria-label="Filter by category">
+                            <option value="all">All categories</option>
+                        </select>
+                    </div>
+
+                    <div id="allTransactions" class="transaction-list">
+                        <div class="empty-state">
+                            <span class="empty-state-icon">⇄</span>
+                            <h4>No transactions yet.</h4>
+                            <p>Your recorded activity will appear here.</p>
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <!-- Insights page -->
+            <section class="page-section" id="insightsPage" hidden>
+                <div class="welcome-row">
+                    <div>
+                        <p class="section-kicker">UNDERSTAND YOUR HABITS</p>
+                        <h2>Clarity changes everything.</h2>
+                        <p class="muted-text">Discover patterns in the transactions you record.</p>
+                    </div>
+                </div>
+
+                <div class="feature-grid">
+                    <article class="panel feature-card">
+                        <span class="feature-icon">◉</span>
+                        <p class="section-kicker">YOUR BUDGET</p>
+                        <h3>Spend with intention.</h3>
+                        <p>Set a monthly spending limit and keep track of your progress.</p>
+
+                        <label for="monthlyBudgetInput">Monthly spending limit (₹)</label>
+                        <input type="number" id="monthlyBudgetInput"
+                               min="0" step="100" placeholder="e.g. 15000">
+
+                        <button class="primary-button full-width" id="saveBudgetButton">
+                            Save budget
+                        </button>
+                    </article>
+
+                    <article class="panel feature-card">
+                        <span class="feature-icon">⌁</span>
+                        <p class="section-kicker">WHAT-IF STUDIO</p>
+                        <h3>Imagine what's possible.</h3>
+                        <p>Explore how a small change to your weekly spending could add up.</p>
+
+                        <label for="whatIfAmount">Weekly change in spending</label>
+                        <div class="what-if-input-row">
+                            <span>₹</span>
+                            <input type="number" id="whatIfAmount"
+                                   min="0" step="50" value="500">
+                        </div>
+
+                        <div class="what-if-results">
+                            <div>
+                                <span>In 1 month</span>
+                                <strong id="whatIfMonth">₹2,000</strong>
+                            </div>
+                            <div>
+                                <span>In 1 year</span>
+                                <strong id="whatIfYear">₹26,000</strong>
+                            </div>
+                        </div>
+
+                        <p class="fine-print">Illustrative estimates based on 4 and 52 weeks, without interest. Actual results depend on your choices.</p>
+                    </article>
+
+                    <article class="panel feature-card">
+                        <span class="feature-icon">✧</span>
+                        <p class="section-kicker">SMART INSIGHTS</p>
+                        <h3 id="insightCardTitle">Your patterns, made clearer.</h3>
+                        <p id="insightCardMessage">Record some transactions to receive helpful observations about your activity.</p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Goals page -->
+            <section class="page-section" id="goalsPage" hidden>
+                <div class="welcome-row">
+                    <div>
+                        <p class="section-kicker">YOUR FUTURE, YOUR WAY</p>
+                        <h2>Give your goals a place to grow.</h2>
+                        <p class="muted-text">Turn the things that matter into achievable steps.</p>
+                    </div>
+
+                    <button class="primary-button" id="addGoalButton">
+                        ＋ Create a goal
+                    </button>
+                </div>
+
+                <div class="feature-grid">
+                    <article class="panel feature-card goal-create-card">
+                        <span class="feature-icon">◎</span>
+                        <h3>A goal worth growing toward.</h3>
+                        <p>Create a savings goal and track your progress as you contribute.</p>
+                        <button class="secondary-button" id="createGoalFromCard">
+                            Create your first goal
+                        </button>
+                    </article>
+                </div>
+
+                <div class="goals-grid" id="goalsList"></div>
+            </section>
+
+            <!-- Money Story page -->
+            <section class="page-section" id="money-storyPage" hidden>
+                <div class="welcome-row">
+                    <div>
+                        <p class="section-kicker">YOUR FINANCIAL REFLECTION</p>
+                        <h2>Your Money Story.</h2>
+                        <p class="muted-text">A thoughtful look at what changed, what worked, and what's next.</p>
+                    </div>
+
+                    <select id="storyPeriod" aria-label="Money Story period">
+                        <option value="week">This week</option>
+                        <option value="month" selected>This month</option>
+                        <option value="year">This year</option>
+                    </select>
+                </div>
+
+                <div class="story-summary-grid">
+                    <article class="panel story-stat">
+                        <span>Income</span>
+                        <strong id="storyIncome">₹0</strong>
+                    </article>
+                    <article class="panel story-stat">
+                        <span>Expenses</span>
+                        <strong id="storyExpenses">₹0</strong>
+                    </article>
+                    <article class="panel story-stat">
+                        <span>Net savings</span>
+                        <strong id="storySavings">₹0</strong>
+                    </article>
+                </div>
+
+                <article class="panel story-main-panel">
+                    <span class="feature-icon">✧</span>
+                    <h3 id="storyHeadline">Every journey starts somewhere.</h3>
+                    <p id="storyNarrative">Record transactions to build your first Money Story.</p>
+                </article>
+            </section>
+
+            <!-- Money Quests page -->
+            <section class="page-section" id="questsPage" hidden>
+                <div class="welcome-row">
+                    <div>
+                        <p class="section-kicker">YOUR OWN PERSONAL BEST</p>
+                        <h2>Small quests. Stronger habits.</h2>
+                        <p class="muted-text">Compete with your past self, one meaningful step at a time.</p>
+                    </div>
+                </div>
+
+                <div class="quest-hero panel">
+                    <div>
+                        <p class="section-kicker">YOUR CURRENT LEVEL</p>
+                        <h3 id="questLevelTitle">Level 1 · Beginner</h3>
+                        <p id="questLevelDescription">Every thoughtful action moves you forward.</p>
+                    </div>
+
+                    <div class="quest-xp">
+                        <strong id="questTotalPoints">0 XP</strong>
+                        <span>earned so far</span>
+                    </div>
+                </div>
+
+                <div class="quest-stats-grid">
+                    <article class="panel quest-stat">
+                        <span class="quest-stat-icon">✦</span>
+                        <span>Current streak</span>
+                        <strong id="questCurrentStreak">0 days</strong>
+                    </article>
+
+                    <article class="panel quest-stat">
+                        <span class="quest-stat-icon">♧</span>
+                        <span>Personal best</span>
+                        <strong id="questBestStreak">0 days</strong>
+                    </article>
+
+                    <article class="panel quest-stat">
+                        <span class="quest-stat-icon">◇</span>
+                        <span>Badges earned</span>
+                        <strong id="questBadgesCount">0</strong>
+                    </article>
+                </div>
+
+                <div class="quest-section-heading">
+                    <div>
+                        <p class="section-kicker">YOUR NEXT STEPS</p>
+                        <h3>Active quests</h3>
+                    </div>
+                </div>
+
+                <div class="quests-grid" id="questsList"></div>
+
+                <div class="quest-section-heading">
+                    <div>
+                        <p class="section-kicker">MILESTONES THAT MATTER</p>
+                        <h3>Your achievement collection</h3>
+                    </div>
+                </div>
+
+                <div class="badges-grid" id="badgesList"></div>
+
+                <article class="panel personal-best-panel">
+                    <p class="section-kicker">YOUR PROGRESS, YOUR PACE</p>
+                    <h3>You're building your own story.</h3>
+                    <p id="personalBestMessage">
+                        Your personal records will grow as you build consistent financial habits.
+                    </p>
+                </article>
+            </section>
+
+            <!-- Footer -->
+            <footer class="app-footer">
+                <span>vaultly<span class="brand-dot">.</span></span>
+                <span>Your money. Your journey. Your pace.</span>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- Add transaction dialog -->
+    <div class="modal-backdrop" id="transactionModal" hidden>
+        <section class="modal-card" role="dialog"
+                 aria-modal="true" aria-labelledby="transactionModalTitle">
+
+            <div class="modal-heading">
+                <div>
+                    <p class="section-kicker">YOUR MONEY ACTIVITY</p>
+                    <h2 id="transactionModalTitle">Add transaction</h2>
+                </div>
+
+                <button class="modal-close" id="closeTransactionModal"
+                        aria-label="Close dialog">×</button>
+            </div>
+
+            <form id="transactionForm">
+                <input type="hidden" id="transactionId">
+
+                <fieldset class="transaction-type-options">
+                    <legend>What kind of transaction is this?</legend>
+
+                    <label class="type-option">
+                        <input type="radio" name="transactionType"
+                               value="expense" checked>
+                        <span>↗ Expense</span>
+                    </label>
+
+                    <label class="type-option">
+                        <input type="radio" name="transactionType"
+                               value="income">
+                        <span>↙ Income</span>
+                    </label>
+                </fieldset>
+
+                <label for="transactionTitle">Transaction name</label>
+                <input type="text" id="transactionTitle"
+                       placeholder="e.g. Groceries, Salary"
+                       maxlength="80" required>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="transactionAmount">Amount (₹)</label>
+                        <input type="number" id="transactionAmount"
+                               min="0.01" max="1000000000000"
+                               step="0.01" placeholder="0.00" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="transactionDate">Date</label>
+                        <input type="date" id="transactionDate" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="transactionCategory">Category</label>
+                        <select id="transactionCategory" required>
+                            <option value="Food">Food & Dining</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Bills">Bills & Utilities</option>
+                            <option value="Health">Health</option>
+                            <option value="Education">Education</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Salary">Salary</option>
+                            <option value="Business">Business</option>
+                            <option value="Investment">Investment</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="transactionPayment">Payment method</label>
+                        <select id="transactionPayment">
+                            <option value="UPI">UPI</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Card">Card</option>
+                            <option value="Bank transfer">Bank transfer</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <label for="transactionNote">Note (optional)</label>
+                <textarea id="transactionNote" rows="2"
+                          maxlength="250"
+                          placeholder="Add a little detail..."></textarea>
+
+                <p class="form-error" id="transactionFormError"
+                   role="alert" hidden></p>
+
+                <div class="modal-actions">
+                    <button type="button" class="secondary-button"
+                            id="cancelTransactionButton">Cancel</button>
+
+                    <button type="submit" class="primary-button">
+                        Save transaction
+                    </button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <!-- Create savings goal dialog -->
+    <div class="modal-backdrop" id="goalModal" hidden>
+        <section class="modal-card" role="dialog"
+                 aria-modal="true" aria-labelledby="goalModalTitle">
+
+            <div class="modal-heading">
+                <div>
+                    <p class="section-kicker">YOUR FUTURE, YOUR WAY</p>
+                    <h2 id="goalModalTitle">Create a savings goal</h2>
+                </div>
+
+                <button class="modal-close" id="closeGoalModal"
+                        aria-label="Close dialog">×</button>
+            </div>
+
+            <form id="goalForm">
+                <label for="goalName">What are you saving for?</label>
+                <input type="text" id="goalName"
+                       maxlength="70" placeholder="e.g. New laptop" required>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="goalTarget">Target amount (₹)</label>
+                        <input type="number" id="goalTarget"
+                               min="0.01" max="1000000000000"
+                               step="0.01" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="goalInitialAmount">Already saved (₹)</label>
+                        <input type="number" id="goalInitialAmount"
+                               min="0" max="1000000000000"
+                               step="0.01" value="0" required>
+                    </div>
+                </div>
+
+                <label for="goalDate">Target date (optional)</label>
+                <input type="date" id="goalDate">
+
+                <p class="form-error" id="goalFormError" role="alert" hidden></p>
+
+                <div class="modal-actions">
+                    <button type="button" class="secondary-button"
+                            id="cancelGoalButton">Cancel</button>
+
+                    <button type="submit" class="primary-button">
+                        Create goal
+                    </button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <!-- Notification messages -->
+    <div class="toast-container" id="toastContainer"
+         aria-live="polite" aria-atomic="true"></div>
+
+</body>
+</html>
